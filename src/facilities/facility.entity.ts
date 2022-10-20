@@ -1,5 +1,5 @@
+import { License } from 'src/licenses/license.entity';
 import { Column, Entity, ObjectID, ObjectIdColumn } from 'typeorm';
-
 @Entity('facilities')
 export class Facility {
   @ObjectIdColumn() id: ObjectID;
@@ -11,7 +11,7 @@ export class Facility {
   @Column() DisplayName: string;
   @Column() CredentialedDate: Date;
   @Column() FacilityType: string;
-  //@Column() License: Licensee; create License
+  @Column() License: License;
 
   constructor(facilities?: Partial<Facility>) {
     Object.assign(this, facilities);
