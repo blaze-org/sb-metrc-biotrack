@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { PackageModule } from './packages/package.module';
+import { FacilityModule } from './facilities/facility.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
@@ -10,14 +11,13 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       type: 'mongodb',
       url: 'mongodb+srv://admin:jtkdfMEbxDADF7H6@sb-metrc-biotrack.qilidz4.mongodb.net/sb-metrc-biotrack',
       database: 'sb-metrc-biotrack',
-      entities: [
-        __dirname + '/**/*.entity{.ts,.js}',
-      ],
+      entities: [__dirname + '/**/*.entity{.ts,.js}'],
       ssl: true,
       useUnifiedTopology: true,
-      useNewUrlParser: true
+      useNewUrlParser: true,
     }),
-    PackageModule
+    PackageModule,
+    FacilityModule,
   ],
   controllers: [AppController],
   providers: [AppService],
