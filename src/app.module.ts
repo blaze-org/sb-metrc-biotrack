@@ -3,6 +3,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { PackageModule } from './packages/package.module';
 import { FacilityModule } from './facilities/facility.module';
+import { MetricTagModule } from './metricTags/metricTag.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
@@ -18,6 +19,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     }),
     PackageModule,
     FacilityModule,
+    MetricTagModule,
   ],
   controllers: [AppController],
   providers: [AppService],
