@@ -14,6 +14,10 @@ export class PackageService {
         return await this.packageRepository.find();
     }
 
+    async getPackageById(id): Promise<Package>{
+        return await this.packageRepository.findOne(id);
+    }
+
     async createPackage(packageModel: Package){
         return this.packageRepository.save(packageModel);
     }
