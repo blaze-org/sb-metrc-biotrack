@@ -1,8 +1,6 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { PackagesController } from './packages/packages.controller';
-import { ConfigModule } from '@nestjs/config';
 import { PackageModule } from './packages/package.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
@@ -10,7 +8,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
   imports: [
     TypeOrmModule.forRoot({
       type: 'mongodb',
-      url: 'mongodb+srv://admin:jtkdfMEbxDADF7H6@sb-metrc-biotrack.qilidz4.mongodb.net/test',
+      url: 'mongodb+srv://admin:jtkdfMEbxDADF7H6@sb-metrc-biotrack.qilidz4.mongodb.net/sb-metrc-biotrack',
       database: 'sb-metrc-biotrack',
       entities: [
         __dirname + '/**/*.entity{.ts,.js}',
