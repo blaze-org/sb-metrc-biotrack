@@ -1,11 +1,15 @@
+import { Item } from "src/items/item.entity";
 import { Column, Entity, ObjectID, ObjectIdColumn } from "typeorm";
 
 @Entity('packages')
 export class Package{
-    @ObjectIdColumn() id: ObjectID;
+    @ObjectIdColumn() _id: ObjectID;
     @Column() label:string;
     @Column() packageType:string;
     @Column() packageDate:Date;
+    @Column() unitOfMeasureName:string;
+    @Column() unitOfMeasureAbbreviation:string;
+    @Column() item:Item[];
 
 
     constructor(packages?: Partial<Package>) {

@@ -1,6 +1,6 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Logger, Param, Post } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { MongoRepository } from 'typeorm';
+import { MongoRepository, ObjectID } from 'typeorm';
 import { Package } from './package.entity';
 import { PackageService } from './packages.service';
 
@@ -13,6 +13,11 @@ export class PackagesController {
     @Get()
     async getPackages(): Promise<Package[]> {
         return this.packageService.getPackages();
+    }
+
+    @Get('/:id')
+    async getPackageById(@Param('id') id): Promise<Package> {
+         return await this.packageService.getPackageById(id);
     }
 
     @Post()

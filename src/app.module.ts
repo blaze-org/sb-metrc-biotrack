@@ -17,7 +17,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       useUnifiedTopology: true,
       useNewUrlParser: true
     }),
-    PackageModule
+    PackageModule,
   ],
   controllers: [AppController],
   providers: [AppService],

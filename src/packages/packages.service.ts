@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
-import { MongoRepository } from "typeorm";
+import { MongoRepository, ObjectID } from "typeorm";
 import { Package } from "./package.entity";
 
 @Injectable()
@@ -12,6 +12,10 @@ export class PackageService {
     {}
     async getPackages(): Promise<Package[]> {
         return await this.packageRepository.find();
+    }
+
+    async getPackageById(id): Promise<Package>{
+        return await this.packageRepository.findOne(id);
     }
 
     async createPackage(packageModel: Package){
