@@ -17,8 +17,18 @@ export class MetricTagController {
   async createMetricTags(
     @Body() metricTags: Partial<MetricTag>,
   ): Promise<MetricTag> {
+    metricTags.Used = false;
     return await this.metricTagService.createMetricTags(
       new MetricTag(metricTags),
+    );
+  }
+
+  @Post('/generate')
+  async generateQtyMetricTags(
+    @Body() quantity: number
+  ): Promise<MetricTag[]> {
+    return await this.metricTagService.generateQtyMetricTags(
+      quantity,
     );
   }
 }
