@@ -1,7 +1,7 @@
 import { Column, Entity, ObjectID, ObjectIdColumn } from "typeorm";
 
 @Entity('items')
-export class items{
+export class Item{
     @ObjectIdColumn() id: ObjectID;
     @Column() name:string;
     @Column() productCategoryName:string;
@@ -10,7 +10,7 @@ export class items{
     @Column() unitofMeasure:string;
 
 
-    constructor(items?: Partial<items>) {
+    constructor(items?: Partial<Item>) {
         Object.assign(this, items);
       }
 }

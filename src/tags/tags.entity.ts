@@ -1,7 +1,7 @@
 import { Column, Entity, ObjectID, ObjectIdColumn } from "typeorm";
 
 @Entity('tags')
-export class tags{
+export class Tag{
     @ObjectIdColumn() id: ObjectID;
     @Column() label:string;
     @Column() metrcType:string;
@@ -11,7 +11,7 @@ export class tags{
     @Column() detached:string;
 
 
-    constructor(tags?: Partial<tags>) {
+    constructor(tags?: Partial<Tag>) {
         Object.assign(this, tags);
       }
 }
