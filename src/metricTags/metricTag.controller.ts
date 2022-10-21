@@ -22,8 +22,14 @@ export class MetricTagController {
     );
   }
 
-  @Get('/:type')
+  @Get('type/:type')
   async getMetricTagsByType(@Param('type') type: string): Promise<MetricTag[]> {
     return this.metricTagService.getMetricTagsByType(type);
   }
+
+  @Get('valid/:tag')
+  async validateMetricTagsBId(@Param('tag') tag: string): Promise<boolean> {
+    return this.metricTagService.isValid(tag);
+  }
+
 }

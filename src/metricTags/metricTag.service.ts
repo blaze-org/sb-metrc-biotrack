@@ -25,4 +25,19 @@ export class MetricTagService {
       },
     });
   }
+
+  async isValid(tag: string): Promise<boolean> {
+    let isValid = false;
+    await this.metricTagRepository
+      .findOneBy({ Tag: tag })
+      .then((response) => {
+        if (response != null && !response.Used) {
+          isValid = true;
+        }
+      })
+      .catch((error) => {
+        isValid = false;
+      });
+    return isValid;
+  }
 }
