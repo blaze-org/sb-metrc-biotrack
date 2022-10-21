@@ -5,12 +5,12 @@ import { Column, Entity, ObjectID, ObjectIdColumn } from "typeorm";
 @Entity('packages')
 export class Package{
     @ObjectIdColumn()_id: ObjectID;
-    @Column() @IsString() label:string;
-    @Column() @IsString() packageType:string;
-    @Column() @IsDateString() packageDate:Date;
-    @Column() @IsString() unitOfMeasureName:string;
-    @Column() @IsString() unitOfMeasureAbbreviation:string;
-    @Column() @IsArray()item:Item[];
+    @Column() @IsString() Label:string;
+    @Column() @IsString() PackageType:string;
+    @Column() @IsDateString() PackageDate:Date;
+    @Column() @IsString() UnitOfMeasureName:string;
+    @Column() @IsString() UnitOfMeasureAbbreviation:string;
+    @Column() @IsArray()Item:Item[];
 
     constructor(packages?: Partial<Package>) {
         Object.assign(this, packages);
