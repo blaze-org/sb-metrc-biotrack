@@ -1,4 +1,5 @@
 import { Column, Entity, ObjectID, ObjectIdColumn } from "typeorm";
+import { InternalData } from "src/internalData/internaldata.entity";
 
 @Entity('transfers')
 export class Transfer{
@@ -16,6 +17,7 @@ export class Transfer{
     @Column() shipmentTransactiontype:string;
     @Column() shipperFacilityLicenseNumber:string;
     @Column() shipperFacilityName:string;
+    @Column() internalData:InternalData;
 
     constructor(transfers?: Partial<Transfer>){
         Object.assign(this, transfers);
