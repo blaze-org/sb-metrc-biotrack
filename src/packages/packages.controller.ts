@@ -10,6 +10,7 @@ export class PackagesController {
         private readonly packageService: PackageService
         ) {}
     
+
     @Get('/v1/active')
     async getPackages(@Query('licenseNumber')licenseNumber, @Query('lastModifiedStart')lastModifiedStart, 
         @Query('lastModifiedEnd')lastModifiedEnd): Promise<Package[]> {
