@@ -4,18 +4,18 @@ import { MongoRepository } from 'typeorm';
 import { Transfer } from "./transfer.entity"
 import { TransferService } from "./transfers.service"
 
-@Controller('transfers')
+@Controller('transfers/v1')
 export class TransfersController{
     constructor(
         private readonly transferService: TransferService
     ){}
 
-    @Get()
+    @Get('/outgoing')
     async getTransfers(): Promise<Transfer[]>{
         return this.transferService.getTransfers();
     }
 
-    @Post()
+    @Post('/external/incoming')
     async createTransfers(@Body() transfers: Partial<Transfer>): Promise<Transfer>{
         return await this.transferService.createTransfers(new Transfer(transfers));
     }
