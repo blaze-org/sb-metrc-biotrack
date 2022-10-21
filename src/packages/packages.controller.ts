@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Query, UsePipes, ValidationPipe } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { MongoRepository } from 'typeorm';
 import { Package } from './package.entity';
@@ -10,18 +10,22 @@ export class PackagesController {
         private readonly packageService: PackageService
         ) {}
     
-    @Get()
-    async getPackages(): Promise<Package[]> {
-        return this.packageService.getPackages();
+
+    @Get('/v1/active')
+    async getPackages(@Query('licenseNumber')licenseNumber, @Query('lastModifiedStart')lastModifiedStart, 
+        @Query('lastModifiedEnd')lastModifiedEnd): Promise<Package[]> {
+
+        return this.packageService.getPackages(lastModifiedStart, lastModifiedEnd);
     }
 
-    @Get('/:id')
-    async getPackageById(@Param('id') id): Promise<Package> {
+    @Get('/v1/:id')
+    async getPackageById(@Param('id') id, @Query('licenseNumber')licenseNumber): Promise<Package> {
          return await this.packageService.getPackageById(id);
     }
 
     @Post()
-    async createPackage(@Body() packages: Partial<Package>): Promise<Package> {
+    @UsePipes(new ValidationPipe({whitelist: true}))
+    async createPackage(@Body() packages: Package): Promise<Package> {
         return await this.packageService.createPackage(new Package(packages));
     }
 }
