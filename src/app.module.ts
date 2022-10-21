@@ -6,7 +6,7 @@ import { FacilityModule } from './facilities/facility.module';
 import { MetricTagModule } from './metricTags/metricTag.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { TransferModule } from './transfers/transfer.module';
-import { itemsModule } from './items/items.module';
+import { ItemsModule } from './items/items.module';
 import { MetricTagTypeModule } from './metricTagTypes/metricTagType.module';
 
 @Module({
@@ -24,7 +24,7 @@ import { MetricTagTypeModule } from './metricTagTypes/metricTagType.module';
     FacilityModule,
     MetricTagModule,
     TransferModule,
-    itemsModule,
+    ItemsModule,
     MetricTagTypeModule
   ],
   controllers: [AppController],
