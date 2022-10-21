@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Header, Post, Res } from '@nestjs/common';
+import { Body, Controller, Get, Header, Post, Query, Res, UsePipes, ValidationPipe } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ExcelService } from 'src/excel/excel.service';
 import { MongoRepository } from 'typeorm';
@@ -20,17 +20,19 @@ export class MetricTagController {
   }
 
   @Post()
+  @UsePipes(new ValidationPipe({whitelist: true}))
   async createMetricTags(
-    @Body() metricTags: Partial<MetricTag>,
+    @Body() metricTags: MetricTag,
   ): Promise<MetricTag> {
     return await this.metricTagService.createMetricTags(
       new MetricTag(metricTags),
     );
   }
 
-  @Get('/download')
+  @Get('/export')
   @Header('Content-Type', 'text/csv')
-  async exportCSV(@Res() res: Response){
+  async exportCSV(@Res() res: Response, @Query('licenseNumber')licenseNumber, @Query('type')type, 
+        @Query('dateStart')dateStart, @Query('dateEnd')dateEnd){
     let data = await this.metricTagService.getMetricTags()
     Promise.all(data).then(async (values) => {
       let result = await this.excelService.downloadExcel(values)
