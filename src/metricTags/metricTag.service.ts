@@ -17,4 +17,12 @@ export class MetricTagService {
   async createMetricTags(metricTagModel: MetricTag) {
     return this.metricTagRepository.save(metricTagModel);
   }
+
+  async getMetricTagsByType(type: string): Promise<MetricTag[]> {
+    return await this.metricTagRepository.find({
+      where: {
+        'MetricType.Name': { $eq: type },
+      },
+    });
+  }
 }
