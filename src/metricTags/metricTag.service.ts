@@ -1,5 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { MetrcTagGenerateRequest } from 'src/commons/datatypes';
+import { InternalData } from 'src/internalData/internaldata.entity';
+import { MetricTagType } from 'src/metricTagTypes/metricTagType.entity';
 import { MongoRepository } from 'typeorm';
 import { MetricTag } from './metricTag.entity';
 
@@ -18,26 +21,31 @@ export class MetricTagService {
     return this.metricTagRepository.save(metricTagModel);
   }
 
-  async createRandomMetricTags(metricTagModel: MetricTag){
+  async createRandomMetricTags(metricTagModel: MetricTag) {
     return this.metricTagRepository.save(metricTagModel);
   }
 
-  async generateQtyMetricTags(quantity: number){
-    const baseString = "1A4FF030000025D00000"
+  async generateQtyMetricTags(metrcTagrRequest: MetrcTagGenerateRequest) {
+    const baseString = '1C4BB030000025D00000';
     let baseNumber = 0o000;
-    let listMetricTags = [];
-    let metricTagModel = new MetricTag;
-    metricTagModel.Status= "Received";
-    metricTagModel.Used= false;
-    metricTagModel.MetricType.Name= "CannabisPlant";
-    metricTagModel.MetricType.Type= "Plant";
-    metricTagModel.InternalData.licenseNumber= "C12-1000005-LIC";
-    metricTagModel.InternalData.state = "CA";
-    for (let i = 0; i < quantity; i++) {
-      baseNumber =+ i;
-      let final = baseString + baseNumber;
-      metricTagModel.Tag = final;
-      listMetricTags.push(metricTagModel);
+    const listMetricTags: MetricTag[] = [];
+    const basemetricTagModel = new MetricTag();
+    basemetricTagModel.Status = 'Received';
+    basemetricTagModel.Used = false;
+    const newMetrcType = new MetricTagType();
+    newMetrcType.Name = metrcTagrRequest.typeName;
+    newMetrcType.Type = metrcTagrRequest.type;
+    basemetricTagModel.MetricType = newMetrcType;
+    const newInternalData = new InternalData();
+    newInternalData.licenseNumber = 'C12-1000005-LIC';
+    newInternalData.state = 'CA';
+    basemetricTagModel.InternalData = newInternalData;
+    for (let i = 0; i < metrcTagrRequest.quantity; i++) {
+      const newMetricTag = { ...basemetricTagModel };
+      baseNumber = +i;
+      const final = baseString + baseNumber;
+      newMetricTag.Tag = final;
+      listMetricTags.push(newMetricTag);
     }
     return this.metricTagRepository.save(listMetricTags);
   }

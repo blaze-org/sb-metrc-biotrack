@@ -1,5 +1,6 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { MetrcTagGenerateRequest } from 'src/commons/datatypes';
 import { MongoRepository } from 'typeorm';
 import { MetricTag } from './metricTag.entity';
 import { MetricTagService } from './metricTag.service';
@@ -25,10 +26,8 @@ export class MetricTagController {
 
   @Post('/generate')
   async generateQtyMetricTags(
-    @Body() quantity: number
+    @Body() metrcTagrRequest: MetrcTagGenerateRequest,
   ): Promise<MetricTag[]> {
-    return await this.metricTagService.generateQtyMetricTags(
-      quantity,
-    );
+    return await this.metricTagService.generateQtyMetricTags(metrcTagrRequest);
   }
 }
