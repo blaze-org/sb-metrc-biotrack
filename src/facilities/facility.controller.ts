@@ -4,7 +4,7 @@ import { MongoRepository } from 'typeorm';
 import { Facility } from './facility.entity';
 import { FacilityService } from './facility.service';
 
-@Controller('facilities')
+@Controller('facilities/v1')
 export class FacilityController {
   constructor(private readonly facilityService: FacilityService) {}
 
