@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { MongoRepository } from 'typeorm';
 import { MetricTag } from './metricTag.entity';
@@ -21,4 +21,15 @@ export class MetricTagController {
       new MetricTag(metricTags),
     );
   }
+
+  @Get('type/:type')
+  async getMetricTagsByType(@Param('type') type: string): Promise<MetricTag[]> {
+    return this.metricTagService.getMetricTagsByType(type);
+  }
+
+  @Get('valid/:tag')
+  async validateMetricTagsBId(@Param('tag') tag: string): Promise<boolean> {
+    return this.metricTagService.isValid(tag);
+  }
+
 }
