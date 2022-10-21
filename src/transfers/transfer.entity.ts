@@ -4,6 +4,7 @@ import { Column, Entity, ObjectID, ObjectIdColumn } from "typeorm";
 export class Transfer{
     @ObjectIdColumn() id: ObjectID;
     @Column() manifestNumber:string;
+    @Column() internalLicense:string;
     @Column() name:string;
     @Column() deliveryId:number;
     @Column() packageCount:number;
