@@ -1,6 +1,7 @@
 import { Body, Controller, Get, Param, Header, Post, Query, Res, UsePipes, ValidationPipe } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ExcelService } from 'src/excel/excel.service';
+import { MetrcTagGenerateRequest } from 'src/commons/datatypes';
 import { MongoRepository } from 'typeorm';
 import { MetricTag } from './metricTag.entity';
 import { Response } from 'express';
@@ -24,6 +25,7 @@ export class MetricTagController {
   async createMetricTags(
     @Body() metricTags: MetricTag,
   ): Promise<MetricTag> {
+    metricTags.Used = false;
     return await this.metricTagService.createMetricTags(
       new MetricTag(metricTags),
     );
@@ -47,6 +49,13 @@ export class MetricTagController {
     Promise.all(data).then(async (values) => {
       let result = await this.excelService.downloadExcel(values)
       res.download(`${result}`)
-    });
+    })
+  }
+
+  @Post('/generate')
+  async generateQtyMetricTags(
+    @Body() metrcTagrRequest: MetrcTagGenerateRequest,
+  ): Promise<MetricTag[]> {
+    return await this.metricTagService.generateQtyMetricTags(metrcTagrRequest);
   }
 }
