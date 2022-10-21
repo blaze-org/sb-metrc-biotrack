@@ -33,7 +33,7 @@ export class MetricTagController {
   @Header('Content-Type', 'text/csv')
   async exportCSV(@Res() res: Response, @Query('licenseNumber')licenseNumber, @Query('type')type, 
         @Query('dateStart')dateStart, @Query('dateEnd')dateEnd){
-    let data = await this.metricTagService.getMetricTags()
+    let data = await this.metricTagService.getMetricTagsBetweenDate(dateStart, dateEnd)
     Promise.all(data).then(async (values) => {
       let result = await this.excelService.downloadExcel(values)
       res.download(`${result}`)
