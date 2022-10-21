@@ -1,20 +1,20 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { MongoRepository } from "typeorm";
-import { items } from "./items.entity";
+import { Item } from "./items.entity";
 
 @Injectable()
 export class itemsService {
     constructor(
-        @InjectRepository(items)
-        private readonly itemsRepository: MongoRepository<items>
+        @InjectRepository(Item)
+        private readonly itemsRepository: MongoRepository<Item>
     )
     {}
-    async getitems(): Promise<items[]> {
+    async getitems(): Promise<Item[]> {
         return await this.itemsRepository.find();
     }
 
-    async createPackage(itemsModel: items){
+    async createitems(itemsModel: Item){
         return this.itemsRepository.save(itemsModel);
     }
 }

@@ -1,4 +1,4 @@
-import { Item } from "src/items/item.entity";
+import { Item } from "src/items/items.entity";
 import { Column, Entity, ObjectID, ObjectIdColumn } from "typeorm";
 
 @Entity('packages')
