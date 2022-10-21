@@ -6,6 +6,7 @@ import { FacilityModule } from './facilities/facility.module';
 import { MetricTagModule } from './metricTags/metricTag.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { TransferModule } from './transfers/transfer.module';
+import { ItemsModule } from './Items/items.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { TransferModule } from './transfers/transfer.module';
       useUnifiedTopology: true,
       useNewUrlParser: true,
     }),
+    ItemsModule,
     PackageModule,
     FacilityModule,
     MetricTagModule,

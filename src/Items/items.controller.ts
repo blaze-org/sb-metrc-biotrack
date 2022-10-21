@@ -1,22 +1,23 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { MongoRepository } from 'typeorm';
+import { ApiBody, ApiTags } from '@nestjs/swagger';
 import { Item } from './items.entity';
-import { itemsService } from './items.service';
+import { ItemsService } from './items.service';
 
-@Controller('items')
-export class itemsController {
+@ApiTags('Items')
+@Controller('items/v1')
+export class ItemsController {
     constructor(
-        private readonly itemsService: itemsService
-        ) {}
+        private readonly itemsService: ItemsService
+    ) {}
     
-    @Get()
-    async getitems(): Promise<Item[]> {
-        return this.itemsService.getitems();
+    @Get("active")
+    async getItems(): Promise<Item[]> {
+        return await this.itemsService.getItems();
     }
 
-    @Post()
-    async createitems(@Body() items: Partial<Item>): Promise<Item> {
-        return await this.itemsService.createitems(new Item(items));
+    @Post("create")
+    @ApiBody({type: Item})
+    async createItems(@Body() items: Partial<Item>): Promise<Item> {
+        return await this.itemsService.createItem(new Item(items));
     }
 }

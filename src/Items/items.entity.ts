@@ -1,16 +1,16 @@
-import { Column, Entity, ObjectID, ObjectIdColumn } from "typeorm";
+import { Column, Entity, ObjectID, ObjectIdColumn,  } from "typeorm";
 
 @Entity('items')
 export class Item{
-    @ObjectIdColumn() id: ObjectID;
-    @Column() name:string;
-    @Column() productCategoryName:string;
-    @Column() productCategoryType:string;
-    @Column() quantityType:string;
-    @Column() unitofMeasure:string;
+    @ObjectIdColumn() _id: ObjectID;
+    @Column() Name: String;
+    @Column() ProductCategoryName: String;
+    @Column() ProductCategoryType: String;
+    @Column() QuantityType: String;
+    @Column() UnitOfMeasureName: String;
 
 
     constructor(items?: Partial<Item>) {
-        Object.assign(this, items);
-      }
+      Object.assign(this, items);
+    }
 }

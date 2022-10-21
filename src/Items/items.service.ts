@@ -4,17 +4,17 @@ import { MongoRepository } from "typeorm";
 import { Item } from "./items.entity";
 
 @Injectable()
-export class itemsService {
+export class ItemsService {
     constructor(
         @InjectRepository(Item)
         private readonly itemsRepository: MongoRepository<Item>
-    )
-    {}
-    async getitems(): Promise<Item[]> {
+    ) {}
+
+    async getItems(): Promise<Item[]> {
         return await this.itemsRepository.find();
     }
 
-    async createitems(itemsModel: Item){
-        return this.itemsRepository.save(itemsModel);
+    async createItem(itemsModel: Partial<Item>): Promise<Item> {
+        return await this.itemsRepository.save(itemsModel);
     }
 }
