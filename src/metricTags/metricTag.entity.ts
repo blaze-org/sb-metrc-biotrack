@@ -1,6 +1,6 @@
 import { InternalData } from 'src/internalData/internaldata.entity';
 import { MetricTagType } from 'src/metricTagTypes/metricTagType.entity';
-import { IsBoolean, IsDateString, isDateString, IsString } from 'class-validator';
+import { IsBoolean, IsDateString, isDateString, IsObject, IsString } from 'class-validator';
 import { Column, Entity, ObjectID, ObjectIdColumn } from 'typeorm';
 
 @Entity('metrc_tags')
@@ -11,7 +11,7 @@ export class MetricTag {
   @Column() @IsDateString() Comissioned: Date;
   @Column() @IsBoolean() Used: boolean;
   @Column() @IsBoolean() Detached: boolean;
-  @Column() MetricType: MetricTagType;
+  @Column() @IsObject() MetricType: MetricTagType;
   @Column() InternalData: InternalData;
 
   constructor(metricTags?: Partial<MetricTag>) {
