@@ -22,4 +22,8 @@ export class PackageRepository extends MongoRepository<Package>{
             }
         });
     }
+
+    async findPackageByLabel(label): Promise<Package> {
+        return await this.findOneBy({ Label: label });
+    }    
 }

@@ -18,8 +18,8 @@ export class PackageService {
         }
     }
 
-    async getPackageById(id): Promise<Package>{
-        return await this.packageRepository.findOne(id);
+    async getPackageById(label): Promise<Package>{
+        return await this.packageRepository.findPackageByLabel(label);
     }
 
     async createPackage(packageModel: Package){
